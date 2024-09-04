@@ -1,0 +1,13 @@
+.NavBar-nav-div {
+  margin: 8px;
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.NavBar-body {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
