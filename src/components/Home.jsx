@@ -1,6 +1,7 @@
 import supabase from "../config/supabaseClient";
 
 const Home = ({ user }) => {
+  console.log("hi");
   const signInAnonymously = async () => {
     const { data, error } = await supabase.auth.signInAnonymously();
     console.log(error);
