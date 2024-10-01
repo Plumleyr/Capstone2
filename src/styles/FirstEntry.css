@@ -1,0 +1,75 @@
+.tracker {
+  width: 100%;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+.FE-img1 {
+  position: absolute;
+  top: 15%;
+  left: 40%;
+}
+
+.FE-img2 {
+  position: absolute;
+  bottom: 17%;
+  left: 10%;
+}
+
+.FE-img3 {
+  position: absolute;
+  right: 12%;
+  bottom: 2%;
+}
+
+.FE-h1 {
+  font-weight: normal;
+  font-size: 48px;
+  margin-top: 80px;
+}
+
+.FE-text {
+  font-size: 20px;
+}
+
+.FE-btn-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.react-aria-RadioGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  color: var(--dark);
+  margin: 30px 0 60px 0;
+}
+
+.FE-radio {
+  display: flex;
+  margin-right: 40px;
+  align-items: center;
+  gap: 0.571rem;
+  font-size: 1.143rem;
+  color: var(--dark);
+  forced-color-adjust: none;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 1.286rem;
+    height: 1.286rem;
+    box-sizing: border-box;
+    border: 0.143rem solid var(--dark);
+    background: transparent;
+    border-radius: 1.286rem;
+    transition: all 200ms;
+  }
+}
+
+.FE-radio.selected {
+  &:before {
+    border-color: var(--secondary);
+    border-width: 0.5rem;
+  }
+}

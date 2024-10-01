@@ -1,0 +1,31 @@
+.Container {
+  width: min(90%, 1194px);
+  height: min(90%, 600px);
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 50px;
+  border-top: 1px solid #f0edff;
+  border-left: 1px solid #f0edff;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  background-image: linear-gradient(
+    180deg,
+    rgba(198, 186, 255, 0.62) 0%,
+    rgba(132, 107, 255, 0.62) 100%
+  );
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+}
+
+.shadow {
+  position: absolute;
+  border-radius: 50px;
+  bottom: -3%;
+  width: 100%;
+  box-shadow: 0 0 50px 20px rgba(111, 82, 253, 1);
+  z-index: -1;
+}

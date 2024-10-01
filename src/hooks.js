@@ -1,55 +1,63 @@
 import { useState, useEffect } from "react";
 import supabase from "./config/supabaseClient";
+import useStore from "./store";
 
 export const useUserSession = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [initialSignIn, setInitialSignIn] = useState(true);
 
-  useEffect(() => {
-    const getSessionAndUser = async () => {
-      setLoading(true);
-      setError(null);
+  const { setHasDisease, setUser, setIsAnonymous, setLoading } = useStore();
 
-      try {
-        const { data: newSession, error: sessionError } =
-          await supabase.auth.getSession();
-        console.log("session", newSession, "error", sessionError);
+  const fetchSessionAndUser = async () => {
+    setLoading(true);
+    setError(null);
 
-        if (sessionError) throw sessionError;
+    try {
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
 
-        let userId = null;
+      const session = sessionData?.session;
 
-        if (newSession) {
-          userId = newSession.session.user.id;
-        } else {
-          const { data: anonUser, error: anonError } =
-            await supabase.auth.signInAnonymously();
-          console.log("anon user", anonUser, "error", anonError);
+      if (session) {
+        setIsAnonymous(session.user.is_anonymous || false);
 
-          if (anonError) throw anonError;
-
-          userId = anonError.user.id;
-        }
-
-        const { data: user, error: userError } = await supabase
+        const { data: userData, error: userError } = await supabase
           .from("users")
           .select("*")
-          .eq("user_id", userId);
+          .eq("user_id", session.user.id);
 
         if (userError) throw userError;
 
-        setUser(user[0]);
-      } catch (err) {
-        setError(err.message || "An error occurred");
-        console.error("Error:", err);
-      } finally {
-        setLoading(false);
+        setUser(userData?.[0]);
+        setHasDisease(userData?.[0].disease ? true : false);
+      } else {
+        setUser(null);
       }
+    } catch (err) {
+      setError(err.message || "An error occurred");
+      console.error("Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSessionAndUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_OUT" || event === "USER_UPDATED") {
+        fetchSessionAndUser();
+      } else if (event === "SIGNED_IN" && initialSignIn) {
+        setInitialSignIn(false);
+        fetchSessionAndUser();
+      }
+    });
+
+    return () => {
+      authListener?.subscription.unsubscribe();
     };
+  }, [initialSignIn]);
 
-    getSessionAndUser();
-  }, []);
-
-  return { user, loading, error };
+  return { error };
 };

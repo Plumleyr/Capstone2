@@ -1,15 +1,21 @@
 import { useUserSession } from "../hooks";
 import Routes from "./Routes";
+import useStore from "../store";
+import "../styles/App.css";
 
 function App() {
-  const { user, loading, error } = useUserSession();
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const { error } = useUserSession();
+  const { loading } = useStore();
 
   return (
     <>
-      <Routes user={user} />
+      {loading ? (
+        <div className="App-Loading">Loading...</div>
+      ) : error ? (
+        <div>Error: {error}</div>
+      ) : (
+        <Routes />
+      )}
     </>
   );
 }

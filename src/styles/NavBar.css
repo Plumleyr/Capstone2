@@ -1,13 +1,30 @@
 .NavBar-nav-div {
-  margin: 8px;
-  height: 7vh;
+  padding: 15px 45px;
+  height: 9vh;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--Secondary, #def79c);
 }
 
 .NavBar-body {
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  height: 91vh;
+  overflow: hidden;
+}
+
+.NavBar-NavLink {
+  margin: 0 4px;
+}
+
+.NavBar-Branding-Link {
+  color: var(--Secondary, #def79c);
+  text-align: center;
+  font-family: Magilio, sans-serif;
+  font-size: 60px;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.Nav-Btn {
+  margin: 0 10px;
 }
