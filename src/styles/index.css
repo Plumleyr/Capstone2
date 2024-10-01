@@ -1,5 +1,52 @@
+:root {
+  --light: rgba(244, 242, 255, 1);
+  --secondary: rgba(222, 247, 156, 1);
+  --primary: rgba(132, 107, 255, 1);
+  --dark: rgba(19, 0, 115, 1);
+  --disabled: #a0b271;
+}
+
+@font-face {
+  font-family: "Magilio";
+  src: url("./fonts/Magilio.ttf") format("truetype");
+}
+
 body {
+  font-family: "Helvetica", sans-serif;
   margin: 0;
+  overflow: hidden;
+}
+
+.btn {
+  color: var(--dark);
+  padding: 6px 17px 7px 17px;
+  background: var(--secondary);
+  border-radius: 50px;
+  border: 1px solid var(--secondary);
+}
+
+.btn:hover:not(:disabled) {
+  color: var(--secondary);
+  background: var(--dark);
+  border: 1px solid var(--dark);
+}
+
+.btn:disabled {
+  background-color: var(--disabled);
+  border: 1px solid var(--disabled);
+}
+
+.btn-outlined {
+  color: var(--Secondary, #def79c);
+  background: transparent;
+  padding: 6px 17px 7px 17px;
+  border-radius: 50px;
+  border: 2px solid var(--Secondary, #def79c);
+}
+
+.btn-outlined:hover {
+  color: var(--dark);
+  border: 2px solid var(--dark);
 }
 
 #root {
@@ -8,5 +55,5 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: grey;
+  background-color: var(--primary);
 }

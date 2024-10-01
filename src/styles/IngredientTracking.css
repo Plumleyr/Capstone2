@@ -1,0 +1,62 @@
+.tracker {
+  width: 100%;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+.IT-h1 {
+  font-weight: normal;
+  font-size: 48px;
+  margin-top: 80px;
+}
+
+.IT-text {
+  font-size: 20px;
+}
+
+.IT-btn-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.IT-TF {
+  display: flex;
+  flex-direction: column;
+}
+
+.IT-btn {
+  margin-left: 15px;
+}
+
+.IT-TA {
+  margin: 15px 0;
+  padding: 5px 0 0 10px;
+  font-family: Helvetica;
+  font-size: 20px;
+  color: var(--dark);
+  width: 100%;
+  height: 187px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.IT-img1 {
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  top: 35%;
+  left: 14%;
+}
+
+.IT-img2 {
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  top: 13%;
+  right: 30%;
+}
+
+.IT-img3 {
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  left: 35%;
+  bottom: -5%;
+}
