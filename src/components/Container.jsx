@@ -1,8 +1,8 @@
 import "../styles/Container.css";
 
-const Container = ({ children }) => {
+const Container = ({ width, height, children }) => {
   return (
-    <div className="Container">
+    <div style={{ width: width, height: height }} className="Container">
       {children}
       <div className="shadow"></div>
     </div>

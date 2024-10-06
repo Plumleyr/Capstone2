@@ -1,0 +1,56 @@
+.LI-h1 {
+  font-weight: normal;
+  font-size: 48px;
+  margin: 80px 0 15px 0;
+}
+
+.LI-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 min(10%, 60px);
+}
+
+.LI-p {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.LI-lbl {
+  color: var(--light);
+  font-family: "Source Sans Pro";
+  font-size: 12px;
+  display: block;
+}
+
+.LI-TF {
+  display: flex;
+  flex-direction: column;
+}
+
+.LI-btn-div {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.LI-img1 {
+  position: absolute;
+  right: 25%;
+  top: 24%;
+}
+
+.LI-img2 {
+  position: absolute;
+  left: 20%;
+  bottom: 20%;
+}
+
+.LI-img3 {
+  position: absolute;
+  right: 22%;
+  bottom: -5%;
+}

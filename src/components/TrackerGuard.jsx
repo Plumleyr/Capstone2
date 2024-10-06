@@ -5,7 +5,7 @@ import useStore from "../store";
 
 const TrackerGuard = ({ children }) => {
   const [shouldRedirect, setShouldRedirect] = useState(null);
-  const { user, disease, setLoading } = useStore();
+  const { user, hasDisease } = useStore();
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -16,10 +16,10 @@ const TrackerGuard = ({ children }) => {
         if (hasCompletedTracker) {
           setShouldRedirect(null);
         } else {
-          if (!disease) {
-            setShouldRedirect("/first-entry");
-          } else {
+          if (hasDisease) {
             setShouldRedirect("/stomach-status");
+          } else {
+            setShouldRedirect("/first-entry");
           }
         }
       }

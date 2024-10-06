@@ -3,16 +3,27 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../store";
 import { handleAnonSignUp, handleSessionlessSignUp } from "../functions";
 import Container from "./Container";
+import Ellipse3 from "../assets/Ellipse3.png";
+import Ellipse2 from "../assets/Ellipse2.png";
 import { Form, Label, Input, TextField, Button } from "react-aria-components";
+import "../styles/SignUp.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const { user } = useStore();
 
   const INITIAL_STATE = {
+    ...(user ? {} : { name: "" }),
     email: "",
     password: "",
-    ...(user ? { name: "" } : {}),
+    confirm: "",
+  };
+
+  const labelName = {
+    name: "Name",
+    email: "Email",
+    password: "Password",
+    confirm: "Confirm Password",
   };
 
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -42,81 +53,30 @@ const SignUp = () => {
   };
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        {Object.entries(formData).map(([key, value], idx) => (
-          <TextField
-            key={idx}
-            name={key}
-            onChange={(e) => handleChange(e, key)}
-          >
-            <Label>{key}</Label>
-            <Input />
-          </TextField>
-        ))}
-      </Form>
-    </Container>
-    //   <div>
-    //     {user ? (
-    //       <form onSubmit={handleSubmit}>
-    //         {formData.map((prop) =>(
-
-    //         ))}
-    //         <label htmlFor="email">Email:</label>
-    //         <input
-    //           type="text"
-    //           name="email"
-    //           value={formData.email}
-    //           onChange={handleChange}
-    //         />
-
-    //         <label htmlFor="password">Password:</label>
-    //         <input
-    //           type="password"
-    //           name="password"
-    //           value={formData.password}
-    //           onChange={handleChange}
-    //         />
-
-    //         <button>Sign Up</button>
-    //       </form>
-    //     ) : (
-    //       <form onSubmit={handleSubmit}>
-    //         <label htmlFor="first_name">First:</label>
-    //         <input
-    //           type="text"
-    //           name="first_name"
-    //           value={formData.first_name}
-    //           onChange={handleChange}
-    //         />
-
-    //         <label htmlFor="last_name">Last:</label>
-    //         <input
-    //           type="text"
-    //           name="last_name"
-    //           value={formData.last_name}
-    //           onChange={handleChange}
-    //         />
-
-    //         <label htmlFor="email">Email:</label>
-    //         <input
-    //           type="text"
-    //           name="email"
-    //           value={formData.email}
-    //           onChange={handleChange}
-    //         />
-
-    //         <label htmlFor="password">Password:</label>
-    //         <input
-    //           type="password"
-    //           name="password"
-    //           value={formData.password}
-    //           onChange={handleChange}
-    //         />
-    //         <button>Sign Up</button>
-    //       </form>
-    //     )}
-    //   </div>
+    <>
+      <img className="SU-img1" src={Ellipse3} alt="" />
+      <img className="SU-img2" src={Ellipse3} alt="" />
+      <img className="SU-img3" src={Ellipse2} alt="" />
+      <Container width="min(80%, 457px)" height="min(80%, 516px)">
+        <Form className="SU-form" onSubmit={handleSubmit}>
+          <h1 className="SU-h1">Sign Up</h1>
+          {Object.entries(formData).map(([key], idx) => (
+            <TextField
+              key={idx}
+              name={key}
+              onChange={(e) => handleChange(e, key)}
+              className="SU-TF"
+            >
+              <Label className="SU-lbl">{labelName[key]}</Label>
+              <Input className="form-control" placeholder={labelName[key]} />
+            </TextField>
+          ))}
+          <div className="SU-btn-div">
+            <Button className="btn">Sign Up</Button>
+          </div>
+        </Form>
+      </Container>
+    </>
   );
 };
 

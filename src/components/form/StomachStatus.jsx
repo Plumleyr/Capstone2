@@ -25,7 +25,7 @@ const StomachStatus = () => {
       <img className="SS-img1" src={Ellipse3} alt="" />
       <img className="SS-img2" src={Ellipse3} alt="" />
       <img className="SS-img3" src={Ellipse2} alt="" />
-      <Container>
+      <Container width="min(90%, 1194px)" height="min(90%, 600px)">
         <Form className="tracker" onSubmit={handleSubmit}>
           <h1 className="SS-h1">How Are You Feeling? 😊</h1>
           <p className="SS-text">

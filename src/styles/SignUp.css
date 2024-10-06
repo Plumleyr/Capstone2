@@ -1,0 +1,52 @@
+.SU-h1 {
+  font-weight: normal;
+  font-size: 48px;
+  margin-top: 80px;
+}
+
+.SU-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 min(10%, 60px);
+}
+
+.SU-lbl {
+  color: var(--light);
+  font-family: "Source Sans Pro";
+  font-size: 12px;
+  display: block;
+}
+
+.SU-TF {
+  display: flex;
+  flex-direction: column;
+}
+
+.SU-btn-div {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.SU-img1 {
+  position: absolute;
+  right: 25%;
+  bottom: 24%;
+}
+
+.SU-img2 {
+  position: absolute;
+  left: 3%;
+  bottom: 40%;
+}
+
+.SU-img3 {
+  position: absolute;
+  left: 22%;
+  bottom: -12%;
+  max-width: 100vw;
+}

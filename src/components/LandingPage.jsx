@@ -37,7 +37,7 @@ const LandingPage = () => {
           <img className="LP-GS-img1" src={Ellipse3} alt="" />
           <img className="LP-GS-img2" src={Ellipse3} alt="" />
           <img className="LP-GS-img3" src={Ellipse2} alt="" />
-          <Container>
+          <Container width="min(90%, 1194px)" height="min(90%, 600px)">
             <div className="LP-text form">
               <h1 className="GS-h1">
                 Welcome to <span>Capstone 2</span> 🎉

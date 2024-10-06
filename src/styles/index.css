@@ -57,3 +57,32 @@ body {
   overflow: hidden;
   background-color: var(--primary);
 }
+
+.form-control {
+  display: block;
+  color: var(--dark);
+  width: 100%;
+  padding: 4px 8px;
+  margin: 5px 0 10px 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: var(--light);
+  background-clip: padding-box;
+  border: 1px solid var(--light);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  background-color: #fff;
+  border-color: var(--primary);
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem var(--dark);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}

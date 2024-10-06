@@ -1,0 +1,21 @@
+.cell {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.cell:focus {
+  outline: none;
+}
+
+/* .cell:hover {
+  color: var(--dark);
+} */
+
+.cell.disabled {
+  display: none;
+}

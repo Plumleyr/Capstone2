@@ -1,6 +1,4 @@
 .Container {
-  width: min(90%, 1194px);
-  height: min(90%, 600px);
   color: var(--dark);
   display: flex;
   flex-direction: column;

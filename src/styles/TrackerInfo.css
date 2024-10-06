@@ -1,0 +1,44 @@
+.TI-main {
+  color: var(--secondary);
+}
+
+.TI-date {
+  margin: 0 0 10px 0;
+}
+
+.TI-ingAte,
+.TI-goodIng,
+.TI-badIng {
+  width: 402px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--secondary);
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.TI-ingAte::-webkit-scrollbar,
+.TI-goodIng::-webkit-scrollbar,
+.TI-badIng::-webkit-scrollbar {
+  display: none;
+}
+
+.TI-ingAte {
+  height: 112px;
+}
+
+.TI-goodIng,
+.TI-badIng {
+  height: 232px;
+}
+
+.TI-heading {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.TI-p {
+  margin: 0;
+}

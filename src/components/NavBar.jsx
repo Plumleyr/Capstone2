@@ -40,7 +40,7 @@ const NavBar = () => {
                 onPress={() => navigate("/login")}
                 className="Nav-Btn btn-outlined"
               >
-                Login
+                Log In
               </Button>
               <Button
                 onPress={() => navigate("/signup")}

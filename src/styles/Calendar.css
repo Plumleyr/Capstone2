@@ -1,0 +1,44 @@
+.calendar {
+  height: 100%;
+  width: 55%;
+  font-family: Magilio;
+  color: var(--secondary);
+}
+
+.calendarPrev,
+.calendarNext {
+  border: none;
+  background-color: transparent;
+}
+
+.calendarPrev:focus,
+.calendarNext:focus {
+  outline: none;
+}
+
+.calendarHeaderDiv {
+  padding: 20px 0;
+}
+
+.calendarHeader {
+  display: inline;
+  margin: 0 30px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.calendarBodyDiv {
+  width: min(80%, 840px);
+  height: min(80%, 660px);
+  padding: 25px;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 242, 255, 0.1) 0%,
+    rgba(147, 145, 153, 0.1) 100%
+  );
+  box-shadow: 0px 4px 50px 0px rgba(19, 0, 115, 0.1);
+}

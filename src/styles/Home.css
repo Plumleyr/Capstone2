@@ -1,20 +1,6 @@
-.tracker {
-  width: 100%;
-  padding: 0 60px;
-  box-sizing: border-box;
-}
-
-.Home-h1 {
-  font-weight: normal;
-  font-size: 48px;
-  margin-top: 80px;
-}
-
-.Home-text {
-  font-size: 20px;
-}
-
-.Home-btn-div {
+.Home-main {
+  padding: 50px;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

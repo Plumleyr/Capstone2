@@ -53,7 +53,7 @@ const IngredientTracking = () => {
       <img className="IT-img1" src={Ellipse3} alt="" />
       <img className="IT-img2" src={Ellipse3} alt="" />
       <img className="IT-img3" src={Ellipse2} alt="" />
-      <Container>
+      <Container width="min(90%, 1194px)" height="min(90%, 600px)">
         <Form className="tracker" onSubmit={handleSubmit}>
           <h1 className="IT-h1"> Time to track your day! 📋</h1>
           <p className="IT-text">

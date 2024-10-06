@@ -141,6 +141,23 @@ export const checkTrackerCompletion = async () => {
   }
 };
 
+export const getTracker = async (date) => {
+  try {
+    const { data: tracker, error: trackerError } = await supabase
+      .from("trackers")
+      .select("*")
+      .eq("entry_date", date);
+
+    if (trackerError) {
+      console.error("error getting selected tracker", trackerError);
+    }
+
+    return tracker[0];
+  } catch (err) {
+    console.error("Unexpected Error", err.message);
+  }
+};
+
 export const signOut = async () => {
   try {
     const { error } = await supabase.auth.signOut();
