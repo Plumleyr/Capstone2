@@ -1,24 +1,9 @@
 import "../styles/TrackerInfo.css";
-import { useState, useEffect } from "react";
-import { getTracker } from "../functions";
+import { useTrackerInfo } from "../hooks";
 
 const TrackerInfo = ({ selectedDate }) => {
-  const [trackerInfo, setTrackerInfo] = useState(null);
-
-  useEffect(() => {
-    const fetchTrackerInfo = async () => {
-      try {
-        const info = await getTracker(selectedDate);
-        setTrackerInfo(info);
-      } catch (error) {
-        console.error("Failed to fetch tracker info:", error);
-      }
-    };
-
-    if (selectedDate) {
-      fetchTrackerInfo();
-    }
-  }, [selectedDate]);
+  const { trackerInfo, goodIngredients, badModerateIngredients } =
+    useTrackerInfo(selectedDate);
 
   return (
     <div className="TI-main">
@@ -29,14 +14,22 @@ const TrackerInfo = ({ selectedDate }) => {
       </div>
       <h3 className="TI-heading">Good food items.</h3>
       <div className="TI-goodIng">
-        <ul>
-          <li></li>
+        <ul className="TI-ul">
+          {goodIngredients.map((ing) => (
+            <li className="TI-li" key={ing.ingredients.ingredient_name}>
+              {ing.ingredients.ingredient_name} - {ing.explanation}
+            </li>
+          ))}
         </ul>
       </div>
       <h3 className="TI-heading">Sensitive food items?</h3>
       <div className="TI-badIng">
-        <ul>
-          <li></li>
+        <ul className="TI-ul">
+          {badModerateIngredients.map((ing) => (
+            <li className="TI-li" key={ing.ingredients.ingredient_name}>
+              {ing.ingredients.ingredient_name} - {ing.explanation}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

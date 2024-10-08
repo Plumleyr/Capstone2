@@ -42,3 +42,13 @@
 .TI-p {
   margin: 0;
 }
+
+.TI-ul {
+  margin: 0;
+  padding: 0;
+}
+
+.TI-li {
+  margin-bottom: 10px;
+  list-style-type: none;
+}

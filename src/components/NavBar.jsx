@@ -28,9 +28,6 @@ const NavBar = () => {
         <nav>
           {user ? (
             <>
-              <NavLink className={getNavLinkClass} to={"/recipes"}>
-                Recipes
-              </NavLink>
               <NavLink className={getNavLinkClass}>{user.name}</NavLink>
             </>
           ) : null}

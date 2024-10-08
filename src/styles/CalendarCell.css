@@ -12,10 +12,26 @@
   outline: none;
 }
 
-/* .cell:hover {
+.cell:hover {
+  background-color: var(--light);
   color: var(--dark);
-} */
+}
 
 .cell.disabled {
   display: none;
+}
+
+.GC-good {
+  color: var(--dark);
+  background-color: var(--secondary);
+}
+
+.GC-meh {
+  color: var(--dark);
+  background-color: #e48a0c;
+}
+
+.GC-bad {
+  color: var(--dark);
+  background-color: #db2e2e;
 }

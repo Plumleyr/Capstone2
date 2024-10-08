@@ -5,7 +5,6 @@ import "../styles/Home.css";
 
 const Home = () => {
   const today = new Date().toISOString().slice(0, 10);
-
   const [selectedDate, setSelectedDate] = useState(today);
   const formatSelectedDate = (dateObj) => {
     const { year, month, day } = dateObj;
