@@ -1,9 +1,12 @@
 .TI-main {
   color: var(--secondary);
+  height: 800px;
+  width: 402px;
 }
 
 .TI-date {
   margin: 0 0 10px 0;
+  padding-top: 20px;
 }
 
 .TI-ingAte,
@@ -51,4 +54,13 @@
 .TI-li {
   margin-bottom: 10px;
   list-style-type: none;
+}
+
+.TI-Loading {
+  height: 100%;
+  width: 100%;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

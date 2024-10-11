@@ -6,14 +6,15 @@ import { getTracker, getIngredientRatings } from "./functions";
 export const useUserSession = () => {
   const [error, setError] = useState(null);
   const [initialSignIn, setInitialSignIn] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  const { setHasDisease, setUser, setIsAnonymous, setLoading } = useStore();
+  const { setHasDisease, setUser, setIsAnonymous } = useStore();
 
   const fetchSessionAndUser = async () => {
-    setLoading(true);
     setError(null);
 
     try {
+      setLoading(true);
       const { data: sessionData, error: sessionError } =
         await supabase.auth.getSession();
       if (sessionError) throw sessionError;
@@ -47,6 +48,7 @@ export const useUserSession = () => {
     fetchSessionAndUser();
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      console.log(event);
       if (event === "SIGNED_OUT" || event === "USER_UPDATED") {
         fetchSessionAndUser();
       } else if (event === "SIGNED_IN" && initialSignIn) {
@@ -60,11 +62,12 @@ export const useUserSession = () => {
     };
   }, [initialSignIn]);
 
-  return { error };
+  return { error, loading };
 };
 
 export const useTrackerInfo = (selectedDate) => {
   const [trackerInfo, setTrackerInfo] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [ingredientInfo, setIngredientInfo] = useState({});
   const [goodIngredients, setGoodIngredients] = useState([]);
   const [badModerateIngredients, setBadModerateIngredients] = useState([]);
@@ -73,6 +76,7 @@ export const useTrackerInfo = (selectedDate) => {
   useEffect(() => {
     const fetchTrackerInfo = async () => {
       try {
+        setLoading(true);
         const info = await getTracker(selectedDate);
         setTrackerInfo(info);
         setIngredientInfo({});
@@ -91,6 +95,8 @@ export const useTrackerInfo = (selectedDate) => {
         );
       } catch (error) {
         console.error("Failed to fetch tracker info:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -118,5 +124,6 @@ export const useTrackerInfo = (selectedDate) => {
     trackerInfo,
     goodIngredients,
     badModerateIngredients,
+    loading,
   };
 };

@@ -17,12 +17,11 @@ const Login = () => {
 
   const [formData, setFormData] = useState(INITIAL_STATE);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChange = (e, key) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [key]: e,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +32,7 @@ const Login = () => {
       console.error("Unexpected Error", err.message);
     }
     setFormData(INITIAL_STATE);
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -59,12 +58,15 @@ const Login = () => {
               </Label>
               <Input
                 className="form-control"
+                type={key === "password" ? "password" : "text"}
                 placeholder={key[0].toUpperCase() + key.slice(1)}
               />
             </TextField>
           ))}
           <div className="LI-btn-div">
-            <Button className="btn">Log In</Button>
+            <Button type="submit" className="btn">
+              Log In
+            </Button>
           </div>
         </Form>
       </Container>

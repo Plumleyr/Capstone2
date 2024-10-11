@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import TrackerGuard from "./TrackerGuard";
 import NavBar from "./NavBar";
 import Home from "./Home";
@@ -46,6 +50,10 @@ const Routes = () => {
         {
           path: "ingredient-tracking",
           element: <IngredientTracking />,
+        },
+        {
+          path: "*",
+          element: <Navigate to="/" />,
         },
       ],
     },

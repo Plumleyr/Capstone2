@@ -33,7 +33,6 @@ const SignUp = () => {
       ...prevData,
       [key]: e,
     }));
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +45,7 @@ const SignUp = () => {
       }
 
       setFormData(INITIAL_STATE);
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       console.error("Unexpected error", err.message);
     }
@@ -68,11 +67,28 @@ const SignUp = () => {
               className="SU-TF"
             >
               <Label className="SU-lbl">{labelName[key]}</Label>
-              <Input className="form-control" placeholder={labelName[key]} />
+              <Input
+                className="form-control"
+                type={
+                  key === "password" || key === "confirm" ? "password" : "text"
+                }
+                placeholder={labelName[key]}
+              />
             </TextField>
           ))}
           <div className="SU-btn-div">
-            <Button className="btn">Sign Up</Button>
+            <Button
+              type="submit"
+              className="btn"
+              isDisabled={
+                formData.password === formData.confirm &&
+                formData.password !== ""
+                  ? false
+                  : true
+              }
+            >
+              Sign Up
+            </Button>
           </div>
         </Form>
       </Container>

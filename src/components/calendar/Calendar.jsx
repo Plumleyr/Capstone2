@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCalendar, useLocale } from "react-aria";
 import { useCalendarState } from "react-stately";
 import { createCalendar } from "@internationalized/date";
@@ -9,6 +10,7 @@ import "../../styles/Calendar.css";
 
 function Calendar(props) {
   let { locale } = useLocale();
+  const [loading, setLoading] = useState(false);
   let state = useCalendarState({
     ...props,
     locale,
@@ -20,19 +22,35 @@ function Calendar(props) {
     state
   );
 
+  const customButton = (buttonProps) => ({
+    ...buttonProps,
+    onPress: () => {
+      setLoading(true);
+      console.log("true");
+      buttonProps.onPress();
+      setTimeout(() => {
+        setLoading(false);
+      }, 200);
+    },
+  });
+
   return (
     <div {...calendarProps} className="calendar">
       <div className="calendarHeaderDiv">
-        <Button className="calendarPrev" {...prevButtonProps}>
+        <Button className="calendarPrev" {...customButton(prevButtonProps)}>
           <img src={ArrowLeft} />
         </Button>
         <h2 className="calendarHeader">{title}</h2>
-        <Button className="calendarNext" {...nextButtonProps}>
+        <Button className="calendarNext" {...customButton(nextButtonProps)}>
           <img src={ArrowRight} />
         </Button>
       </div>
       <div className="calendarBodyDiv">
-        <CalendarGrid state={state} setSelectedDate={props.setSelectedDate} />
+        {loading ? (
+          <div className="calendar-Loading">Loading...</div>
+        ) : (
+          <CalendarGrid state={state} setSelectedDate={props.setSelectedDate} />
+        )}
       </div>
     </div>
   );

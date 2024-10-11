@@ -17,7 +17,7 @@
 }
 
 .NavBar-Branding-Link {
-  color: var(--Secondary, #def79c);
+  color: var(--secondary);
   text-align: center;
   font-family: Magilio, sans-serif;
   font-size: 60px;
@@ -27,4 +27,14 @@
 
 .Nav-Btn {
   margin: 0 10px;
+}
+
+.Nav-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Nav-p {
+  color: var(--secondary);
 }

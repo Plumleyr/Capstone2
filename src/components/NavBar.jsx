@@ -3,6 +3,8 @@ import "../styles/NavBar.css";
 import { signOut } from "../functions";
 import useStore from "../store";
 import { Button } from "react-aria-components";
+import accountIcon from "../assets/account_circle.png";
+import accountIconDark from "../assets/account_circle_dark.png";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -25,12 +27,7 @@ const NavBar = () => {
           Capstone 2
         </Link>
 
-        <nav>
-          {user ? (
-            <>
-              <NavLink className={getNavLinkClass}>{user.name}</NavLink>
-            </>
-          ) : null}
+        <nav className="Nav-nav">
           {isAnonymous ? (
             <>
               <Button
@@ -46,11 +43,16 @@ const NavBar = () => {
                 Sign Up
               </Button>
             </>
-          ) : (
+          ) : null}
+          {user ? (
             <>
-              <NavLink onClick={handleSignOut}>Sign Out</NavLink>
+              <p className="Nav-p"> Howdy, {user.name}</p>
+              <NavLink className={getNavLinkClass}>
+                <img src={accountIcon} alt="icon for account" />
+                {/* <img src={accountIconDark} alt="icon for account" /> */}
+              </NavLink>
             </>
-          )}
+          ) : null}
         </nav>
       </div>
       <div className="NavBar-body">

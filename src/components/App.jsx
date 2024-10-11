@@ -1,12 +1,9 @@
 import { useUserSession } from "../hooks";
 import Routes from "./Routes";
-import useStore from "../store";
 import "../styles/App.css";
 
 function App() {
-  const { error } = useUserSession();
-  const { loading } = useStore();
-
+  const { error, loading } = useUserSession();
   return (
     <>
       {loading ? (

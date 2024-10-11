@@ -5,27 +5,39 @@ import useStore from "../store";
 
 const TrackerGuard = ({ children }) => {
   const [shouldRedirect, setShouldRedirect] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { user, hasDisease } = useStore();
 
   useEffect(() => {
     const checkStatus = async () => {
-      if (!user) {
-        setShouldRedirect("/landing");
-      } else {
-        const hasCompletedTracker = await checkTrackerCompletion();
-        if (hasCompletedTracker) {
-          setShouldRedirect(null);
+      try {
+        setLoading(true);
+        if (!user) {
+          setShouldRedirect("/landing");
         } else {
-          if (hasDisease) {
-            setShouldRedirect("/stomach-status");
+          const hasCompletedTracker = await checkTrackerCompletion();
+          if (hasCompletedTracker) {
+            setShouldRedirect(null);
           } else {
-            setShouldRedirect("/first-entry");
+            if (hasDisease) {
+              setShouldRedirect("/stomach-status");
+            } else {
+              setShouldRedirect("/first-entry");
+            }
           }
         }
+      } catch (err) {
+        console.err("unexpected error", err);
+      } finally {
+        setLoading(false);
       }
     };
     checkStatus();
   }, [user]);
+
+  if (loading) {
+    <div className="App-Loading">Loading...</div>;
+  }
 
   if (shouldRedirect) {
     return <Navigate to={shouldRedirect} />;
