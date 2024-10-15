@@ -1,4 +1,5 @@
 .NavBar-nav-div {
+  position: relative;
   padding: 15px 45px;
   height: 9vh;
   display: flex;
@@ -30,6 +31,7 @@
 }
 
 .Nav-nav {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,4 +39,26 @@
 
 .Nav-p {
   color: var(--secondary);
+}
+
+.Nav-profile-btn {
+  background: transparent;
+  border: none;
+}
+
+.Nav-profile-card {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background-color: var(--secondary);
+}
+
+.hidden {
+  display: none;
 }

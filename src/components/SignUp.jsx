@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store";
-import { handleAnonSignUp, handleSessionlessSignUp } from "../functions";
+import {
+  handleAnonSignUp,
+  handleSessionlessSignUp,
+} from "../api/supabase/auth";
 import Container from "./Container";
 import Ellipse3 from "../assets/Ellipse3.png";
 import Ellipse2 from "../assets/Ellipse2.png";

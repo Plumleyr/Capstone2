@@ -1,7 +1,7 @@
 import { useCalendarCell } from "react-aria";
 import { useEffect, useRef, useState } from "react";
 import "../../styles/CalendarCell.css";
-import { getTracker } from "../../functions";
+import { getTracker } from "../../api/supabase/tracker";
 
 function CalendarCell({ state, date, setSelectedDate }) {
   let ref = useRef(null);
@@ -43,8 +43,9 @@ function CalendarCell({ state, date, setSelectedDate }) {
   };
 
   useEffect(() => {
-    getBackgroundColor(date);
-  }, [date]);
+    // getBackgroundColor(date);
+    console.log(date);
+  }, []);
 
   return (
     <td {...cellProps}>

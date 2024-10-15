@@ -22,6 +22,8 @@ function Calendar(props) {
     state
   );
 
+  console.log(title);
+
   const customButton = (buttonProps) => ({
     ...buttonProps,
     onPress: () => {

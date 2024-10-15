@@ -1,14 +1,16 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import "../styles/NavBar.css";
-import { signOut } from "../functions";
+import { signOut } from "../api/supabase/auth";
 import useStore from "../store";
 import { Button } from "react-aria-components";
 import accountIcon from "../assets/account_circle.png";
 import accountIconDark from "../assets/account_circle_dark.png";
+import { useState } from "react";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const { user, isAnonymous } = useStore();
+  const [profileCard, setProfileCard] = useState("hidden");
   const getNavLinkClass = ({ isActive }) =>
     isActive ? "NavBar-NavLink active" : "NavBar-NavLink";
   const handleSignOut = async () => {
@@ -17,6 +19,14 @@ const NavBar = () => {
       navigate("/login");
     } catch (error) {
       console.error("Error signing out:", error);
+    }
+  };
+
+  const toggleProfileCard = () => {
+    if (profileCard === "") {
+      setProfileCard("hidden");
+    } else {
+      setProfileCard("");
     }
   };
 
@@ -47,10 +57,14 @@ const NavBar = () => {
           {user ? (
             <>
               <p className="Nav-p"> Howdy, {user.name}</p>
-              <NavLink className={getNavLinkClass}>
+              <Button className="Nav-profile-btn" onClick={toggleProfileCard}>
                 <img src={accountIcon} alt="icon for account" />
                 {/* <img src={accountIconDark} alt="icon for account" /> */}
-              </NavLink>
+              </Button>
+              <div className={`Nav-profile-card ${profileCard}`}>
+                <NavLink className={getNavLinkClass}>Edit Profile</NavLink>
+                <Link onClick={handleSignOut}>signOut</Link>
+              </div>
             </>
           ) : null}
         </nav>

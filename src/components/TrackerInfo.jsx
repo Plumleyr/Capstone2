@@ -1,5 +1,5 @@
 import "../styles/TrackerInfo.css";
-import { useTrackerInfo } from "../hooks";
+import { useTrackerInfo } from "../hooks/useTrackerInfo";
 
 const TrackerInfo = ({ selectedDate }) => {
   const { trackerInfo, goodIngredients, badModerateIngredients, loading } =

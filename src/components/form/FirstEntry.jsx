@@ -3,7 +3,7 @@ import Ellipse3 from "../../assets/Ellipse3.png";
 import Ellipse2 from "../../assets/Ellipse2.png";
 import { useState, useEffect } from "react";
 import useStore from "../../store";
-import { getDiseases } from "../../functions";
+import { getDiseases } from "../../api/supabase/diseases";
 
 import { Form, Radio, RadioGroup, Button } from "react-aria-components";
 import Container from "../Container";

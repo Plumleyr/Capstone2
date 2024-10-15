@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleSignIn } from "../functions";
+import { handleSignIn } from "../api/supabase/auth";
 import Ellipse3 from "../assets/Ellipse3.png";
 import Ellipse2 from "../assets/Ellipse2.png";
 import { Form, Label, Input, TextField, Button } from "react-aria-components";

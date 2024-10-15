@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { checkTrackerCompletion } from "../functions";
+import { checkTrackerCompletion } from "../api/supabase/tracker";
 import useStore from "../store";
 
 const TrackerGuard = ({ children }) => {
