@@ -12,7 +12,7 @@ import Container from "../Container";
 
 const StomachStatus = () => {
   const navigate = useNavigate();
-  const { hasDisease, stomachStatus, setStomachStatus } = useStore();
+  const { stomachStatus, setStomachStatus } = useStore();
   const isDisabled = stomachStatus ? false : true;
 
   const handleSubmit = (e) => {
@@ -66,16 +66,6 @@ const StomachStatus = () => {
             </Radio>
           </RadioGroup>
           <div className="SS-btn-div">
-            {!hasDisease && (
-              <Button
-                className="SS-btn btn-outlined"
-                type="button"
-                onPress={() => navigate("/first-entry")}
-              >
-                Back
-              </Button>
-            )}
-
             <Button
               className="SS-btn btn"
               type="submit"

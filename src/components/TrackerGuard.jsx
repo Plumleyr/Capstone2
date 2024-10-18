@@ -6,7 +6,7 @@ import useStore from "../store";
 const TrackerGuard = ({ children }) => {
   const [shouldRedirect, setShouldRedirect] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { user, hasDisease } = useStore();
+  const { user } = useStore();
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -19,11 +19,7 @@ const TrackerGuard = ({ children }) => {
           if (hasCompletedTracker) {
             setShouldRedirect(null);
           } else {
-            if (hasDisease) {
-              setShouldRedirect("/stomach-status");
-            } else {
-              setShouldRedirect("/first-entry");
-            }
+            setShouldRedirect("/stomach-status");
           }
         }
       } catch (err) {
@@ -33,7 +29,7 @@ const TrackerGuard = ({ children }) => {
       }
     };
     checkStatus();
-  }, [user]);
+  }, []);
 
   if (loading) {
     <div className="App-Loading">Loading...</div>;

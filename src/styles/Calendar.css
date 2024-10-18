@@ -39,7 +39,6 @@
 
 .calendarBodyDiv {
   width: min(80%, 840px);
-  /* height: min(80%, 660px); */
   height: 600px;
   padding: 25px;
   background-color: transparent;

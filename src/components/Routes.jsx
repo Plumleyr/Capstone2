@@ -9,9 +9,11 @@ import Home from "./Home";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import LandingPage from "./LandingPage";
-import FirstEntry from "./form/FirstEntry";
 import StomachStatus from "./form/StomachStatus";
 import IngredientTracking from "./form/IngredientTracking";
+import EditProfile from "./EditProfile";
+import GettingStartedName from "./form/GettingStartedName";
+import GettingStartedDisease from "./form/GettingStartedDisease";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -40,8 +42,16 @@ const Routes = () => {
           element: <Login />,
         },
         {
-          path: "first-entry",
-          element: <FirstEntry />,
+          path: "getting-started-name",
+          element: <GettingStartedName />,
+        },
+        {
+          path: "edit-profile",
+          element: <EditProfile />,
+        },
+        {
+          path: "getting-started-disease",
+          element: <GettingStartedDisease />,
         },
         {
           path: "stomach-status",

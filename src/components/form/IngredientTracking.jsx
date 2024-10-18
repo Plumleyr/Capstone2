@@ -1,7 +1,6 @@
 import "../../styles/IngredientTracking.css";
 import useStore from "../../store";
 import { useNavigate } from "react-router-dom";
-import { updateUser } from "../../api/supabase/user";
 import { createTracker } from "../../api/supabase/tracker";
 import { useCreateIngredientRating } from "../../hooks/useCreateIngredientRating";
 
@@ -18,14 +17,7 @@ import Container from "../Container";
 import { useState } from "react";
 
 const IngredientTracking = () => {
-  const {
-    user,
-    disease,
-    stomachStatus,
-    ingredients,
-    setIngredients,
-    resetForm,
-  } = useStore();
+  const { stomachStatus, ingredients, setIngredients, resetForm } = useStore();
   const navigate = useNavigate();
   const isDisabled = ingredients.length > 0 ? false : true;
   const [loading, setLoading] = useState(false);
@@ -34,7 +26,10 @@ const IngredientTracking = () => {
     let currIngredients = e;
     const ingredientList = currIngredients
       .split(",")
-      .map((ing) => ing.trim())
+      .map((ing) => {
+        const trimmedIng = ing.trim();
+        return trimmedIng.charAt(0).toUpperCase() + trimmedIng.slice(1);
+      })
       .filter((ing) => ing !== "");
 
     setIngredients(ingredientList);
@@ -46,17 +41,14 @@ const IngredientTracking = () => {
     const formattedDate = today.toISOString().slice(0, 10);
     try {
       setLoading(true);
-      if (disease) {
-        await updateUser(user.user_id, { disease: disease });
-      }
       await useCreateIngredientRating(ingredients);
       await createTracker(formattedDate, stomachStatus, ingredients);
       resetForm();
-      navigate("/");
     } catch (error) {
       console.error("Error submitting tracker:", error);
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 

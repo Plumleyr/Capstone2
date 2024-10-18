@@ -4,7 +4,6 @@ import { useTrackerInfo } from "../hooks/useTrackerInfo";
 const TrackerInfo = ({ selectedDate }) => {
   const { trackerInfo, goodIngredients, badModerateIngredients, loading } =
     useTrackerInfo(selectedDate);
-
   return (
     <div className="TI-main">
       {loading ? (

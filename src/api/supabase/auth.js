@@ -18,19 +18,13 @@ export const handleAnonSignUp = async (formData) => {
   }
 };
 
-export const handleSessionlessSignUp = async (formData) => {
+export const updateAuthUser = async (updates) => {
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          name: formData.name,
-        },
-      },
+    const { data, error } = await supabase.auth.updateUser({
+      data: updates,
     });
     if (error) {
-      console.log("error signing up", error);
+      console.error("error updating user", error);
     }
   } catch (err) {
     console.error("Unexpected Error", err.message);
@@ -45,19 +39,20 @@ export const handleSignIn = async (formData) => {
     });
 
     if (error) {
-      console.log("error logging in", error);
+      console.error("error logging in", error);
     }
   } catch (err) {
     console.error("Unexpected Error", err.message);
   }
 };
 
-export const signInAnonymously = async (name) => {
+export const signInAnonymously = async (name, disease) => {
   try {
     const { data, error } = await supabase.auth.signInAnonymously({
       options: {
         data: {
-          name: name || "guest",
+          name: name || "Guest",
+          disease: disease,
         },
       },
     });

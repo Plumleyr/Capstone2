@@ -1,17 +1,18 @@
-import "../../styles/FirstEntry.css";
+import "../../styles/GettingStartedDisease.css";
 import Ellipse3 from "../../assets/Ellipse3.png";
 import Ellipse2 from "../../assets/Ellipse2.png";
 import { useState, useEffect } from "react";
 import useStore from "../../store";
 import { getDiseases } from "../../api/supabase/diseases";
+import { signInAnonymously } from "../../api/supabase/auth";
 
 import { Form, Radio, RadioGroup, Button } from "react-aria-components";
 import Container from "../Container";
 import { useNavigate } from "react-router-dom";
 
-const FirstEntry = () => {
+const GettingStartedDisease = () => {
   const navigate = useNavigate();
-  const { disease, setDisease } = useStore();
+  const { disease, setDisease, name } = useStore();
   const [diseases, setDiseases] = useState([]);
 
   const fetchDiseases = async () => {
@@ -21,8 +22,9 @@ const FirstEntry = () => {
 
   const isDisabled = !disease;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await signInAnonymously(name, disease);
     navigate("/stomach-status");
   };
 
@@ -32,13 +34,13 @@ const FirstEntry = () => {
 
   return (
     <>
-      <img className="FE-img1" src={Ellipse3} alt="" />
-      <img className="FE-img2" src={Ellipse3} alt="" />
-      <img className="FE-img3" src={Ellipse2} alt="" />
+      <img className="GSD-img1" src={Ellipse3} alt="" />
+      <img className="GSD-img2" src={Ellipse3} alt="" />
+      <img className="GSD-img3" src={Ellipse2} alt="" />
       <Container width="min(90%, 1194px)" height="min(90%, 600px)">
         <Form className="tracker" onSubmit={handleSubmit}>
-          <h1 className="FE-h1">Our first entry!</h1>
-          <div className="FE-text">
+          <h1 className="GSD-h1">Our first entry!</h1>
+          <div className="GSD-text">
             <p>
               To help us personalize your experience, could you tell us which
               stomach condition you're dealing with?
@@ -52,7 +54,7 @@ const FirstEntry = () => {
                 <Radio
                   key={idx}
                   value={d.disease_name}
-                  className={`FE-radio ${
+                  className={`GSD-radio ${
                     disease === d.disease_name ? "selected" : ""
                   }`}
                 >
@@ -61,8 +63,20 @@ const FirstEntry = () => {
               );
             })}
           </RadioGroup>
-          <div className="FE-btn-div">
-            <Button className="btn" isDisabled={isDisabled} type="submit">
+          <div className="GSD-btn-div">
+            <Button
+              className="GSD-btn btn-outlined"
+              type="button"
+              onPress={() => navigate("/getting-started-name")}
+            >
+              Back
+            </Button>
+
+            <Button
+              className="GSD-btn btn"
+              isDisabled={isDisabled}
+              type="submit"
+            >
               Continue
             </Button>
           </div>
@@ -72,4 +86,4 @@ const FirstEntry = () => {
   );
 };
 
-export default FirstEntry;
+export default GettingStartedDisease;

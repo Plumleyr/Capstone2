@@ -37,8 +37,6 @@ export const createIngredientRating = async (ingArr) => {
         return parsedData;
       })
     );
-
-    console.log(responses);
     return responses;
   } catch (error) {
     console.error("Error generating ingredient ratings:", error);

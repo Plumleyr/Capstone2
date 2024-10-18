@@ -12,7 +12,7 @@ export const getIngredientRatings = async (ingredient, disease) => {
         diseases!inner(disease_name)
       `
       )
-      .ilike("ingredients.ingredient_name", `%${ingredient}%`)
+      .like("ingredients.ingredient_name", `%${ingredient}%`)
       .eq("diseases.disease_name", disease);
 
     if (ratingError) {

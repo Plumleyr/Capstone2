@@ -87,6 +87,7 @@
 }
 
 .LP-input {
+  color: var(--dark);
   width: 51.6%;
   margin-top: 45px;
   border: none;

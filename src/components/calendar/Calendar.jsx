@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCalendar, useLocale } from "react-aria";
 import { useCalendarState } from "react-stately";
 import { createCalendar } from "@internationalized/date";
@@ -6,11 +6,15 @@ import CalendarGrid from "./CalendarGrid";
 import { Button } from "react-aria-components";
 import ArrowLeft from "../../assets/ArrowLeft.png";
 import ArrowRight from "../../assets/ArrowRight.png";
+import { useTrackersFromMonthName } from "../../hooks/useTrackersFromMonthName";
 import "../../styles/Calendar.css";
 
 function Calendar(props) {
   let { locale } = useLocale();
   const [loading, setLoading] = useState(false);
+  const [trackers, setTrackers] = useState([]);
+  const [currMonth, setCurrMonth] = useState(0);
+
   let state = useCalendarState({
     ...props,
     locale,
@@ -21,29 +25,36 @@ function Calendar(props) {
     props,
     state
   );
-
-  console.log(title);
-
-  const customButton = (buttonProps) => ({
-    ...buttonProps,
-    onPress: () => {
+  useEffect(() => {
+    const getMonthlyTrackers = async () => {
       setLoading(true);
-      console.log("true");
-      buttonProps.onPress();
-      setTimeout(() => {
+
+      try {
+        const result = await useTrackersFromMonthName(title);
+        if (result) {
+          const { trackers: fetchedTrackers, currMonth: fetchedCurrMonth } =
+            result;
+          setTrackers(fetchedTrackers);
+          setCurrMonth(fetchedCurrMonth);
+        }
+      } catch (error) {
+        console.error("Error fetching trackers:", error);
+      } finally {
         setLoading(false);
-      }, 200);
-    },
-  });
+      }
+    };
+
+    getMonthlyTrackers();
+  }, [title]);
 
   return (
     <div {...calendarProps} className="calendar">
       <div className="calendarHeaderDiv">
-        <Button className="calendarPrev" {...customButton(prevButtonProps)}>
+        <Button className="calendarPrev" {...prevButtonProps}>
           <img src={ArrowLeft} />
         </Button>
         <h2 className="calendarHeader">{title}</h2>
-        <Button className="calendarNext" {...customButton(nextButtonProps)}>
+        <Button className="calendarNext" {...nextButtonProps}>
           <img src={ArrowRight} />
         </Button>
       </div>
@@ -51,7 +62,12 @@ function Calendar(props) {
         {loading ? (
           <div className="calendar-Loading">Loading...</div>
         ) : (
-          <CalendarGrid state={state} setSelectedDate={props.setSelectedDate} />
+          <CalendarGrid
+            state={state}
+            trackers={trackers}
+            currMonth={currMonth}
+            setSelectedDate={props.setSelectedDate}
+          />
         )}
       </div>
     </div>

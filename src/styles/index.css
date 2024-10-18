@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Magilio";
-  src: url("./fonts/Magilio.ttf") format("truetype");
+  src: url("../fonts/Magilio.ttf") format("truetype");
 }
 
 body {

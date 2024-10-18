@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useStore from "../store";
-import {
-  handleAnonSignUp,
-  handleSessionlessSignUp,
-} from "../api/supabase/auth";
+import { handleAnonSignUp } from "../api/supabase/auth";
 import Container from "./Container";
 import Ellipse3 from "../assets/Ellipse3.png";
 import Ellipse2 from "../assets/Ellipse2.png";
@@ -13,19 +9,16 @@ import "../styles/SignUp.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { user } = useStore();
 
   const INITIAL_STATE = {
-    ...(user ? {} : { name: "" }),
     email: "",
     password: "",
     confirm: "",
   };
 
   const labelName = {
-    name: "Name",
     email: "Email",
-    password: "Password",
+    password: "Password: Must be 6 characters long",
     confirm: "Confirm Password",
   };
 
@@ -38,15 +31,18 @@ const SignUp = () => {
     }));
   };
 
+  const isFormValid = (formData) => {
+    return (
+      formData.password === formData.confirm && formData.password.length >= 6
+    );
+  };
+
+  const disabled = !isFormValid(formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (user) {
-        await handleAnonSignUp(formData);
-      } else {
-        await handleSessionlessSignUp(formData);
-      }
-
+      await handleAnonSignUp(formData);
       setFormData(INITIAL_STATE);
       navigate("/");
     } catch (err) {
@@ -80,16 +76,7 @@ const SignUp = () => {
             </TextField>
           ))}
           <div className="SU-btn-div">
-            <Button
-              type="submit"
-              className="btn"
-              isDisabled={
-                formData.password === formData.confirm &&
-                formData.password !== ""
-                  ? false
-                  : true
-              }
-            >
+            <Button type="submit" className="btn" isDisabled={disabled}>
               Sign Up
             </Button>
           </div>

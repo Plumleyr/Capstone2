@@ -9,18 +9,10 @@ import { useState } from "react";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { user, isAnonymous } = useStore();
+  const { user, isAnonymous, resetNonForm } = useStore();
   const [profileCard, setProfileCard] = useState("hidden");
   const getNavLinkClass = ({ isActive }) =>
     isActive ? "NavBar-NavLink active" : "NavBar-NavLink";
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      navigate("/login");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
 
   const toggleProfileCard = () => {
     if (profileCard === "") {
@@ -30,46 +22,72 @@ const NavBar = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      resetNonForm();
+      await signOut();
+      toggleProfileCard;
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const bodyToggleCard = () => {
+    if (profileCard === "") {
+      setProfileCard("hidden");
+    }
+  };
+
   return (
     <>
       <div className="NavBar-nav-div">
         <Link className="NavBar-Branding-Link" to={"/"}>
-          Capstone 2
+          Gutsy
         </Link>
 
         <nav className="Nav-nav">
-          {isAnonymous ? (
+          {/* Show Log In button if there is no user */}
+          {!user && (
+            <Button
+              onPress={() => navigate("/login")}
+              className="Nav-Btn btn-outlined"
+            >
+              Log In
+            </Button>
+          )}
+
+          {/* Show Sign Up button if isAnonymous is true and there is a user */}
+          {isAnonymous && user && (
+            <Button onPress={() => navigate("/signup")} className="Nav-Btn btn">
+              Sign Up
+            </Button>
+          )}
+
+          {/* Show user info and profile options if the user is logged in */}
+          {user && (
             <>
-              <Button
-                onPress={() => navigate("/login")}
-                className="Nav-Btn btn-outlined"
-              >
-                Log In
-              </Button>
-              <Button
-                onPress={() => navigate("/signup")}
-                className="Nav-Btn btn"
-              >
-                Sign Up
-              </Button>
-            </>
-          ) : null}
-          {user ? (
-            <>
-              <p className="Nav-p"> Howdy, {user.name}</p>
-              <Button className="Nav-profile-btn" onClick={toggleProfileCard}>
+              <p className="Nav-p">Howdy, {user.name}</p>
+              <Button className="Nav-profile-btn" onPress={toggleProfileCard}>
                 <img src={accountIcon} alt="icon for account" />
-                {/* <img src={accountIconDark} alt="icon for account" /> */}
               </Button>
               <div className={`Nav-profile-card ${profileCard}`}>
-                <NavLink className={getNavLinkClass}>Edit Profile</NavLink>
-                <Link onClick={handleSignOut}>signOut</Link>
+                <NavLink
+                  onClick={toggleProfileCard}
+                  className={`${getNavLinkClass} Nav-link`}
+                  to={"/edit-profile"}
+                >
+                  Edit Profile
+                </NavLink>
+                <Link className="Nav-link" onClick={handleSignOut}>
+                  Sign Out
+                </Link>
               </div>
             </>
-          ) : null}
+          )}
         </nav>
       </div>
-      <div className="NavBar-body">
+      <div className="NavBar-body" onClick={bodyToggleCard}>
         <Outlet />
       </div>
     </>

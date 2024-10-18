@@ -4,35 +4,35 @@
   box-sizing: border-box;
 }
 
-.FE-img1 {
+.GSD-img1 {
   position: absolute;
   top: 15%;
   left: 40%;
 }
 
-.FE-img2 {
+.GSD-img2 {
   position: absolute;
   bottom: 17%;
   left: 10%;
 }
 
-.FE-img3 {
+.GSD-img3 {
   position: absolute;
   right: 12%;
   bottom: 2%;
 }
 
-.FE-h1 {
+.GSD-h1 {
   font-weight: normal;
   font-size: 48px;
   margin-top: 80px;
 }
 
-.FE-text {
+.GSD-text {
   font-size: 20px;
 }
 
-.FE-btn-div {
+.GSD-btn-div {
   display: flex;
   justify-content: flex-end;
 }
@@ -45,7 +45,11 @@
   margin: 30px 0 60px 0;
 }
 
-.FE-radio {
+.GSD-btn {
+  margin-left: 15px;
+}
+
+.GSD-radio {
   display: flex;
   margin-right: 40px;
   align-items: center;
@@ -67,7 +71,7 @@
   }
 }
 
-.FE-radio.selected {
+.GSD-radio.selected {
   &:before {
     border-color: var(--secondary);
     border-width: 0.5rem;

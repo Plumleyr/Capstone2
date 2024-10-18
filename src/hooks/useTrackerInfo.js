@@ -10,52 +10,53 @@ export const useTrackerInfo = (selectedDate) => {
   const [badModerateIngredients, setBadModerateIngredients] = useState([]);
   const { user } = useStore();
 
-  const fetchTrackerInfo = async () => {
-    let ingredientInfo = {};
-    try {
-      const info = await getTracker(selectedDate);
-      setTrackerInfo(info);
-      if (info && info.current_ingredients) {
-        const current_ingredients = info?.current_ingredients || null;
-        await Promise.all(
-          current_ingredients.map(async (ingredient) => {
-            const ratings = await getIngredientRatings(
-              ingredient,
-              user?.disease
-            );
-            ingredientInfo[ingredient] = ratings;
-          })
-        );
+  const getAndSetIngredients = async (ingredientInfo) => {
+    const good = [];
+    const badModerate = [];
+
+    Object.entries(ingredientInfo).forEach(([ingredient, info]) => {
+      if (info && info.rating) {
+        if (info.rating === "Good") {
+          good.push(info);
+        } else if (info.rating === "Bad" || info.rating === "Moderate") {
+          badModerate.push(info);
+        }
       }
-      return ingredientInfo;
-    } catch (error) {
-      console.error("Failed to fetch tracker info:", error);
-    }
+    });
+
+    setGoodIngredients(good);
+    setBadModerateIngredients(badModerate);
   };
 
   useEffect(() => {
-    const getAndSetIngredients = async () => {
-      const good = [];
-      const badModerate = [];
+    const fetchTrackerInfo = async () => {
+      let ingredientInfo = {};
 
       setLoading(true);
-      const ingredientInfo = await fetchTrackerInfo();
-      Object.entries(ingredientInfo).forEach(([ingredient, info]) => {
-        if (info?.rating === "Good") {
-          good.push(info);
-        } else if (info?.rating === "Bad" || info?.rating === "Moderate") {
-          badModerate.push(info);
+
+      try {
+        const info = await getTracker(selectedDate);
+        setTrackerInfo(info);
+        if (info && info.current_ingredients) {
+          const current_ingredients = info.current_ingredients || null;
+          await Promise.all(
+            current_ingredients.map(async (ingredient) => {
+              const ratings = await getIngredientRatings(
+                ingredient,
+                user?.disease
+              );
+              ingredientInfo[ingredient] = ratings;
+            })
+          );
         }
-      });
-
-      console.log(trackerInfo);
-      console.log(ingredientInfo);
-
-      setGoodIngredients(good);
-      setBadModerateIngredients(badModerate);
-      setLoading(false);
+        getAndSetIngredients(ingredientInfo);
+      } catch (error) {
+        console.error("Failed to fetch tracker info:", error);
+      } finally {
+        setLoading(false);
+      }
     };
-    getAndSetIngredients();
+    fetchTrackerInfo();
   }, [selectedDate]);
 
   return {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../config/supabaseClient";
+import { getUser } from "../api/supabase/user";
 import useStore from "../store";
 
 export const useUserSession = () => {
@@ -7,7 +8,7 @@ export const useUserSession = () => {
   const [initialSignIn, setInitialSignIn] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const { setHasDisease, setUser, setIsAnonymous } = useStore();
+  const { setUser, setIsAnonymous } = useStore();
 
   const fetchSessionAndUser = async () => {
     setError(null);
@@ -23,15 +24,9 @@ export const useUserSession = () => {
       if (session) {
         setIsAnonymous(session.user.is_anonymous || false);
 
-        const { data: userData, error: userError } = await supabase
-          .from("users")
-          .select("*")
-          .eq("user_id", session.user.id);
+        const userData = await getUser(session.user.id);
 
-        if (userError) throw userError;
-
-        setUser(userData?.[0]);
-        setHasDisease(userData?.[0].disease ? true : false);
+        setUser(userData[0]);
       } else {
         setUser(null);
       }
@@ -48,7 +43,10 @@ export const useUserSession = () => {
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
       console.log(event);
-      if (event === "SIGNED_OUT" || event === "USER_UPDATED") {
+      if (event === "SIGNED_OUT") {
+        fetchSessionAndUser();
+        setInitialSignIn(true);
+      } else if (event === "USER_UPDATED") {
         fetchSessionAndUser();
       } else if (event === "SIGNED_IN" && initialSignIn) {
         setInitialSignIn(false);
