@@ -1,4 +1,5 @@
 import { supabase, getServiceSupabase } from "../../config/supabaseClient";
+import { gptPrompt } from "../../constants/prompt";
 
 export const getIngredientRatings = async (ingredient, disease) => {
   try {
@@ -55,6 +56,32 @@ export const addIngredientRatings = async (
     return ratingData;
   } catch (err) {
     console.error("Unexpected Error", err.message);
+    return null;
+  }
+};
+
+export const createIngredientRating = async (ingArr) => {
+  const supabase = getServiceSupabase();
+  try {
+    const responses = await Promise.all(
+      ingArr.map(async (ing) => {
+        const { data, error } = await supabase.rpc("read_api", {
+          prompt: gptPrompt,
+          ingredient: ing,
+        });
+
+        if (error) {
+          console.error("Error calling read_api", error);
+          return null;
+        }
+
+        return JSON.parse(data);
+      })
+    );
+
+    return responses;
+  } catch (err) {
+    console.error("Unexpected error:", err);
     return null;
   }
 };

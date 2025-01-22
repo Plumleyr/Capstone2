@@ -30,6 +30,8 @@ const EditProfile = () => {
     name: user?.name,
   };
 
+  console.log(user);
+
   const labelName = {
     disease: "Disease",
     name: "Name",
@@ -44,11 +46,6 @@ const EditProfile = () => {
   };
 
   const handleChange = (key, value) => {
-    if (key === "disease") {
-      let temp = value;
-      const selectedDisease = diseases[temp[temp.length - 1] - 1].disease_name;
-      value = selectedDisease;
-    }
     setFormData((prevData) => ({
       ...prevData,
       [key]: value,
@@ -117,7 +114,7 @@ const EditProfile = () => {
                   {diseases.map((disease, idx) => (
                     <ListBoxItem
                       key={idx}
-                      value={disease.disease_name}
+                      id={disease.disease_name}
                       className="EP-LBI"
                     >
                       {disease.disease_name}

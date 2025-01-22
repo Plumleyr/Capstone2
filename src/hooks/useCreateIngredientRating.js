@@ -1,6 +1,8 @@
 import { getIngredient, addIngredient } from "../api/supabase/ingredients";
-import { createIngredientRating } from "../api/openai/gptCalls";
-import { addIngredientRatings } from "../api/supabase/ingredientRating";
+import {
+  addIngredientRatings,
+  createIngredientRating,
+} from "../api/supabase/ingredientRating";
 
 export const useCreateIngredientRating = async (ingredients) => {
   const results = await Promise.all(
@@ -13,6 +15,8 @@ export const useCreateIngredientRating = async (ingredients) => {
   const notFoundIngredients = results
     .filter((result) => !result.found)
     .map((result) => result.ingredient);
+
+  if (notFoundIngredients.length === 0) return;
 
   const newRatings = await createIngredientRating(notFoundIngredients);
 

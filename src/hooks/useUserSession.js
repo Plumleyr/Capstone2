@@ -42,7 +42,6 @@ export const useUserSession = () => {
     fetchSessionAndUser();
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
-      console.log(event);
       if (event === "SIGNED_OUT") {
         fetchSessionAndUser();
         setInitialSignIn(true);
