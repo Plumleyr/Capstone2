@@ -31,9 +31,9 @@ const LandingPage = () => {
             needs you!
           </h1>
           <p className="LP-p">
-            Let’s start logging our food daily and adjust our cooking
+            Let’s start logging our food daily and adjust your
             <br />
-            recipes according to your stomach. It TRUSTS you.
+            diet according to your stomach. It TRUSTS you.
           </p>
         </div>
         <Button
