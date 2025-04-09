@@ -4,7 +4,7 @@ import { signOut } from "../api/supabase/auth";
 import useStore from "../store";
 import { Button } from "react-aria-components";
 import accountIcon from "../assets/account_circle.png";
-import accountIconDark from "../assets/account_circle_dark.png";
+// import accountIconDark from "../assets/account_circle_dark.png";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -26,7 +26,7 @@ const NavBar = () => {
     try {
       resetNonForm();
       await signOut();
-      toggleProfileCard;
+      toggleProfileCard();
       navigate("/login");
     } catch (error) {
       console.error("Error signing out:", error);

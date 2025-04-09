@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useCalendar, useLocale } from "react-aria";
 import { useCalendarState } from "react-stately";
@@ -6,7 +7,7 @@ import CalendarGrid from "./CalendarGrid";
 import { Button } from "react-aria-components";
 import ArrowLeft from "../../assets/ArrowLeft.png";
 import ArrowRight from "../../assets/ArrowRight.png";
-import { useTrackersFromMonthName } from "../../hooks/useTrackersFromMonthName";
+import { fetchTrackersFromMonthName } from "../../hooks/fetchTrackersFromMonthName";
 import "../../styles/Calendar.css";
 
 function Calendar(props) {
@@ -30,7 +31,7 @@ function Calendar(props) {
       setLoading(true);
 
       try {
-        const result = await useTrackersFromMonthName(title);
+        const result = await fetchTrackersFromMonthName(title);
         if (result) {
           const { trackers: fetchedTrackers, currMonth: fetchedCurrMonth } =
             result;

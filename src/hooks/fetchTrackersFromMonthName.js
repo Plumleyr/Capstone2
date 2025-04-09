@@ -1,6 +1,6 @@
 import { supabase } from "../config/supabaseClient";
 
-export const useTrackersFromMonthName = async (date) => {
+export const fetchTrackersFromMonthName = async (date) => {
   const [month, year] = date.split(" ");
   const getDateRangeForMonthName = (month, year) => {
     const monthNames = [
