@@ -55,6 +55,7 @@
 }
 
 .LP-h1 {
+  width: 43%;
   font-size: 64px;
 }
 
@@ -63,6 +64,7 @@
 }
 
 .LP-p {
+  width: 43%;
   font-size: 30px;
 }
 
@@ -102,11 +104,6 @@
   margin: 0 10px;
 }
 
-.LP-GS-btn .disabled {
-  opacity: 0.3;
-  background-color: #a0b271;
-}
-
 .LP-form {
   width: 100%;
 }
@@ -120,4 +117,98 @@
 
 .GS-h1 {
   margin-top: 80px;
+}
+
+@media (max-width: 575px) {
+  .LP-img1,
+  .LP-img2 {
+    display: none;
+  }
+
+  .LP-text,
+  .LP-btn {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .LP-h1 {
+    font-size: 54px;
+  }
+
+  .LP-h1,
+  .LP-p {
+    width: 80%;
+  }
+}
+
+@media ((min-width: 576px) and (max-width: 767px)) {
+  .LP-img1,
+  .LP-text,
+  .LP-btn {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .LP-img2 {
+    left: 73%;
+  }
+
+  .LP-h1,
+  .LP-p {
+    width: 80%;
+  }
+}
+
+@media ((min-width: 768px) and (max-width: 991px)) {
+  .LP-img1,
+  .LP-text,
+  .LP-btn {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .LP-img2 {
+    left: 77%;
+  }
+
+  .LP-h1,
+  .LP-p {
+    width: 82%;
+  }
+}
+
+@media ((min-width: 992px) and (max-width: 1199px)) {
+  .LP-img1,
+  .LP-text,
+  .LP-btn {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .LP-img2 {
+    left: 72%;
+  }
+
+  .LP-h1,
+  .LP-p {
+    width: 69%;
+  }
+}
+
+@media ((min-width: 1200px) and (max-width: 1535px)) {
+  .LP-img1,
+  .LP-text,
+  .LP-btn {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .LP-img2 {
+    left: 65%;
+  }
+
+  .LP-h1,
+  .LP-p {
+    width: 57%;
+  }
 }

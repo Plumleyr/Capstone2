@@ -14,6 +14,7 @@ export const useTrackerInfo = (selectedDate) => {
     const good = [];
     const badModerate = [];
 
+    // eslint-disable-next-line no-unused-vars
     Object.entries(ingredientInfo).forEach(([ingredient, info]) => {
       if (info && info.rating) {
         if (info.rating === "Good") {
@@ -57,6 +58,7 @@ export const useTrackerInfo = (selectedDate) => {
       }
     };
     fetchTrackerInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate]);
 
   return {

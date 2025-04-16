@@ -34,6 +34,7 @@ body {
 .btn:disabled {
   background-color: var(--disabled);
   border: 1px solid var(--disabled);
+  opacity: 0.3;
 }
 
 .btn-outlined {
@@ -44,9 +45,13 @@ body {
   border: 2px solid var(--Secondary, #def79c);
 }
 
-.btn-outlined:hover {
+.btn-outlined:hover:not(:disabled) {
   color: var(--dark);
   border: 2px solid var(--dark);
+}
+
+.btn-outlined:disabled {
+  opacity: 0.3;
 }
 
 #root {

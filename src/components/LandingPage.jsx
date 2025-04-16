@@ -26,14 +26,11 @@ const LandingPage = () => {
         />
         <div className="LP-text">
           <h1 className="LP-h1">
-            Seriously, your <span>stomach</span>
-            <br />
-            needs you!
+            Seriously, your <span>stomach</span> needs you!
           </h1>
           <p className="LP-p">
-            Let’s start logging our food daily and adjust your
-            <br />
-            diet according to your stomach. It TRUSTS you.
+            Let’s start logging our food daily and adjust your diet according to
+            your stomach. It TRUSTS you.
           </p>
         </div>
         <Button

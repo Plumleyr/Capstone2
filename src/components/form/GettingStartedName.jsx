@@ -16,6 +16,7 @@ const GettingStartedName = () => {
     }
   }, [user]);
 
+  let isDisabledGuest = name.length ? true : false;
   let isDisabled = name.length ? false : true;
 
   const handleSubmit = (e) => {
@@ -56,7 +57,11 @@ const GettingStartedName = () => {
             <Input className="LP-input" />
           </TextField>
           <div className="LP-btn-div">
-            <Button className="LP-GS-btn btn-outlined" type="submit">
+            <Button
+              className="LP-GS-btn btn-outlined"
+              type="submit"
+              isDisabled={isDisabledGuest}
+            >
               Continue as guest
             </Button>
             <Button

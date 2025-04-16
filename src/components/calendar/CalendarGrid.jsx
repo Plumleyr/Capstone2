@@ -3,7 +3,7 @@ import { getWeeksInMonth } from "@internationalized/date";
 import CalendarCell from "./CalendarCell";
 import "../../styles/CalendarGrid.css";
 
-function CalendarGrid({ state, trackers, currMonth, ...props }) {
+function CalendarGrid({ state, trackers, ...props }) {
   let { locale } = useLocale();
   let { gridProps, headerProps } = useCalendarGrid(props, state);
   let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

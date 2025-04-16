@@ -30,8 +30,6 @@ const EditProfile = () => {
     name: user?.name,
   };
 
-  console.log(user);
-
   const labelName = {
     disease: "Disease",
     name: "Name",
@@ -102,7 +100,7 @@ const EditProfile = () => {
               <Button className="form-control">
                 <div className="EP-select">
                   <SelectValue>
-                    {(state) => formData.disease || "Select a disease"}
+                    {formData.disease || "Select a disease"}
                   </SelectValue>
                   <span className="EP-carot" aria-hidden="true">
                     ▼
